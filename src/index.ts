@@ -1,9 +1,19 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
+import { DeepidvService } from "./services";
+import { logger } from "hono/logger";
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+const app = new Hono();
 
-export default app
+const BaseRoute = "/api/v1";
+const createRoute = (r: string) => `${BaseRoute}/${r}`;
+
+app.use(logger());
+
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
+
+app.route(createRoute("deepidv"), DeepidvService);
+
+export default app;

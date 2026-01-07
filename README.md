@@ -1,12 +1,20 @@
+# Personal API
+
+[![Deploy Worker](https://github.com/luka2220/personal-api/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/luka2220/personal-api/actions/workflows/deploy.yml)
+
+_Live API Url:_ [api link](https://personal-api.piplicaluka64.workers.dev/)
+
+## Deployment
+
+Github actions are setup to automagically deploy the worker code to cloudflare on _push to main_
+
 ## Running Locally
+
+Install packages and dependencies:
 
 ```txt
 bun i
 bun run dev
-```
-
-```txt
-bun run deploy
 ```
 
 For installing worker types:
