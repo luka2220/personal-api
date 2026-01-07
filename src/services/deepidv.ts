@@ -1,9 +1,9 @@
-import { Hono } from "hono";
+import { Hono } from 'hono';
 
 export const DeepidvService = new Hono();
 
-DeepidvService.post("/wh", async (c) => {
+DeepidvService.post('/wh', async (c) => {
   const data = c.req.json();
-  console.log("Data sent from deepidv: ", data);
-  return c.text("Pinged webhook endpoint");
+  console.log('Data sent from deepidv: ', data);
+  return c.text('Pinged webhook endpoint');
 });

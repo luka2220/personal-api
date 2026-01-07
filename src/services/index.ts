@@ -1,1 +1,1 @@
-export * from "./deepidv";
+export * from './deepidv';
