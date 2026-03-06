@@ -1,19 +1,19 @@
 import { Hono } from 'hono';
-
-import { DeepidvService } from './services';
 import { logger } from 'hono/logger';
 
-const app = new Hono();
+import { DeepidvService, DailyDiffService } from './services';
 
-const BaseRoute = '/api/v1';
-const createRoute = (r: string) => `${BaseRoute}/${r}`;
+const app = new Hono<{ Bindings: Env }>();
 
 app.use(logger());
 
 app.get('/', (c) => {
+  // Possibly return a simple static page here
   return c.text('Hello Hono!');
 });
 
-app.route(createRoute('deepidv'), DeepidvService);
+// v1 api
+app.route('/v1/deepidv', DeepidvService);
+app.route('/v1/daily-diff', DailyDiffService);
 
 export default app;
