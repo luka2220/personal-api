@@ -1,8 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "personal-api",
-  "main": "src/index.ts",
-  "compatibility_date": "2026-01-07",
+  "main": "src/app.ts",
+  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2026-03-16",
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
@@ -10,12 +11,31 @@
       "enabled": true,
       "head_sampling_rate": 1,
       "persist": true,
-      "invocation_logs": true
+      "invocation_logs": true,
     },
     "traces": {
       "enabled": false,
       "persist": true,
-      "head_sampling_rate": 1
-    }
-  }
+      "head_sampling_rate": 1,
+    },
+  },
+  "kv_namespaces": [
+    {
+      "binding": "DAILY_DIFF",
+      "id": "fb1f0e1a18ee4d65bf8ec201f69d31b0",
+      "remote": true,
+    },
+  ],
+  "triggers": {
+    "crons": [
+      "30 20 * * 1-5", // March to Nov
+      // "40 21 * * 1-5", // Nov to March
+    ],
+  },
+  "send_email": [
+    {
+      "name": "DailyDiffEmail",
+      "destination_address": "piplicaluka64@gmail.com",
+    },
+  ],
 }
