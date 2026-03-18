@@ -28,8 +28,7 @@
   ],
   "triggers": {
     "crons": [
-      "30 20 * * 1-5", // March to Nov
-      // "40 21 * * 1-5", // Nov to March
+      "30 20 * * 2-6", // NOTE: This cron schedule is for March to Nov, it will need to change for Nov to March
     ],
   },
   "send_email": [
