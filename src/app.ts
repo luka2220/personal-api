@@ -1,9 +1,7 @@
-import { EmailMessage } from 'cloudflare:email';
-
 import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 
-import { createMimeMessage } from 'mimetext';
+import scheduled from './handlers/cron-schedule-handler';
 import { DeepidvService, DailyDiffService } from './services';
 
 const app = new Hono<{ Bindings: Env }>();
@@ -26,37 +24,5 @@ app.route('/api/v1/daily-diff', DailyDiffService);
 
 export default {
   fetch: app.fetch,
-  // Cron Job Handler
-  async scheduled(
-    controller: ScheduledController,
-    env: Env,
-    ctx: ExecutionContext
-  ) {
-    console.info('Cron Job Running');
-
-    const msg = createMimeMessage();
-
-    msg.setSender({ name: 'daily-diff', addr: 'daily-diff@lukapiplica.net' });
-    msg.setRecipient('piplicaluka64@gmail.com');
-    msg.setSubject('Test email coming from cloudflare worker');
-    msg.addMessage({
-      contentType: 'text/plain',
-      data: `Congratulations, you just sent an email from a worker.`,
-    });
-
-    const message = new EmailMessage(
-      'daily-diff@lukapiplica.net',
-      'piplicaluka64@gmail.com',
-      msg.asRaw()
-    );
-
-    try {
-      await env.DailyDiffEmail.send(message);
-    } catch (e) {
-      console.error('Error sending email: ', e);
-      return new Response('An error occurred sending an email');
-    }
-
-    return new Response('Hello Send Email World!');
-  },
+  scheduled, // Cron Job Handler
 };

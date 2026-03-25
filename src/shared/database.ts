@@ -1,27 +1,21 @@
 /**
- * Fetches a ket from cloudflare KV-Store;
- *
+ * Fetches a ket from cloudflare KV-Store
  * NOTE: parses the response as json if type T is other than string
- *
  * parseAs defaults to string
  * */
 export async function getDB<T = string>(
   db: KVNamespace,
   key: string,
-  parseAs: 'string' | 'json' | undefined
+  parseAs: "string" | "json" | undefined,
 ): Promise<T | null> {
   try {
-    if (parseAs == 'json') {
-      return await db.get<T>(key, { type: 'json' });
-    }
-
-    return await db.get<T>(key);
+    return parseAs === "json"
+      ? await db.get<T>(key, { type: "json" })
+      : await db.get<T>(key);
   } catch (error) {
-    throw new DBOperationError('Error fetching data', {
-      operation: 'get',
-      table: '',
+    console.error("An error occurred fetching an item from the DB: ", {
+      error,
     });
+    return null;
   }
 }
-
-export async function putDB(db: KVNamespace, key: string) {}

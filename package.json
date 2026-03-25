@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@hono/eslint-config": "^2.1.0",
+    "@types/node": "^25.5.0",
     "eslint": "^10.0.2",
     "eslint-plugin-import": "^2.32.0",
     "typescript-eslint": "^8.56.1",

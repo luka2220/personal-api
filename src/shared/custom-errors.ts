@@ -4,7 +4,7 @@ interface DBOperationErrorInfo {
 }
 
 /** Error indicating a DB operation error */
-class DBOperationError extends Error {
+export class DBOperationError extends Error {
   constructor(
     message: string,
     public readonly info: DBOperationErrorInfo
