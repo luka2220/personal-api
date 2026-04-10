@@ -1,16 +1,24 @@
 interface DBOperationErrorInfo {
   table: string;
-  operation: 'list' | 'get' | 'delete' | 'put';
+  operation: "list" | "get" | "delete" | "put";
 }
 
 /** Error indicating a DB operation error */
 export class DBOperationError extends Error {
   constructor(
     message: string,
-    public readonly info: DBOperationErrorInfo
+    public readonly info: DBOperationErrorInfo,
   ) {
     super(message);
-    this.name = 'DBOperationError';
+    this.name = "DBOperationError";
     this.info = info;
+  }
+}
+
+/** Error indicating a Github operation error */
+export class GithubOperationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "GithubOperationError";
   }
 }
