@@ -1,12 +1,13 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
+import type { JwtVariables } from "hono/jwt";
 import { DBOperationError } from "../../shared/custom-errors";
 import { DailyDiffDB } from "../../shared/database/daily-diff-db";
 import { CreateReposOperation } from "./daily-diff-schemas";
 
 export const DailyDiffService = new Hono<{
   Bindings: Env;
-  Variables: { dailyDiffDB: DailyDiffDB };
+  Variables: { dailyDiffDB: DailyDiffDB } & JwtVariables;
 }>();
 
 // Middleware to inject the DailyDiffDB instance into the context
