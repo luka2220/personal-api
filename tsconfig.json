@@ -5,7 +5,13 @@
     "moduleResolution": "Bundler",
     "strict": true,
     "skipLibCheck": true,
-    "types": ["bun", "node"]
+    "allowArbitraryExtensions": true,
+    "types": ["bun", "node"],
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "worker-configuration.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "tests/**/*.ts",
+    "worker-configuration.d.ts"
+  ]
 }

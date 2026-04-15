@@ -102,6 +102,7 @@ export class GithubService {
                       Accept: "application/vnd.github+json",
                       Authorization: `Bearer ${token}`,
                       "X-GitHub-Api-Version": "2026-03-10",
+                      "User-Agent": "personal-api-daily-diff",
                     },
                   },
                 );

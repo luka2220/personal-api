@@ -7,10 +7,30 @@ import { createKVMock } from "./mocks/kv-namespace.mock";
 
 // Mock repo data
 const MOCK_REPOS: Repos = [
+  // {
+  //   name: "repo",
+  //   branches: ["main"],
+  // }
   {
-    name: "repo",
+    name: "deepidv-backend-cdk",
+    branches: ["dev", "preprod", "main", "DIDV-103"],
+  },
+  {
+    name: "deepidv-backoffice",
+    branches: ["dev", "preprod", "main", "DIDV-103"],
+  },
+  {
+    name: "deepidv-verify-ts",
+    branches: ["dev", "preprod", "main", "DIDV-103"],
+  },
+  {
+    name: "deepidv-open-api",
+    branches: ["dev", "main", "DIDV-201"],
+  },
+  {
+    name: "deepidv-shared-deps",
     branches: ["main"],
-  }
+  },
 ];
 
 let gh: GithubService;

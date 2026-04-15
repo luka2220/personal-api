@@ -46,7 +46,7 @@ app.onError((err, c) => {
 
 app.get("/", (c) => {
   // Possibly return a simple static page here
-  return c.text("Hello Hono!");
+  return c.text("");
 });
 
 // v1 api
