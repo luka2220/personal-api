@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 import type { JwtVariables } from "hono/jwt";
 import { jwt } from "hono/jwt";
@@ -23,6 +24,16 @@ function isPublicRoute(path: string, method: string): boolean {
 const app = new Hono<{ Bindings: Env; Variables: JwtVariables }>();
 
 app.use(logger());
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    allowHeaders: ["Authorization", "Content-Type"],
+    allowMethods: ["POST", "GET", "OPTIONS"],
+    maxAge: 600,
+    credentials: true,
+  }),
+);
 
 app.use(async (c, next) => {
   if (isPublicRoute(c.req.path, c.req.method)) {

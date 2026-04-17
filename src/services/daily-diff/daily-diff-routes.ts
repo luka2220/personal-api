@@ -3,6 +3,7 @@ import { Hono } from "hono";
 import type { JwtVariables } from "hono/jwt";
 import { DBOperationError } from "../../shared/custom-errors";
 import { DailyDiffDB } from "../../shared/database/daily-diff-db";
+import { GithubService } from "../../shared/github";
 import { CreateReposOperation } from "./daily-diff-schemas";
 
 export const DailyDiffService = new Hono<{
@@ -59,4 +60,19 @@ DailyDiffService.get("/repo/:name", async (c) => {
   }
 
   return c.json(repoData);
+});
+
+DailyDiffService.get("/commits", async (c) => {
+  const daily_diff_db = c.get("dailyDiffDB");
+  const repos = await daily_diff_db.fetchRepoData();
+
+  const daily_commits = await new GithubService({
+    apiUrl: c.env.GH_API_URL,
+    author: c.env.GH_AUTHOR,
+    repoOwner: c.env.GH_REPO_OWNER,
+    token: c.env.GH_TOKEN,
+    repos,
+  }).getDailyCommits();
+
+  return c.json(daily_commits);
 });
